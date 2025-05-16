@@ -1,0 +1,110 @@
+/* Light theme similar to a banking app */
+body {
+  background-color: #f8f9fa; /* Light gray background */
+  font-family: 'Roboto', sans-serif; /* Clean, modern font */
+  color: #495057; /* Dark gray text for readability */
+}
+
+/* Style the form container */
+.custom-form {
+  background-color: #fff; /* White background for the form */
+  padding: 30px; /* Comfortable padding */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  max-width: 900px; /* Widen the form */
+  margin: 0 auto; /* Center it horizontally */
+}
+
+/* Space out the sections inside the form */
+.custom-form > div {
+  margin-bottom: 40px; /* Increase spacing between sections */
+}
+
+/* Make input fields larger and more spacious */
+.custom-form .form-control {
+  padding: 12px 15px; /* More padding for larger inputs */
+  font-size: 1.1rem; /* Slightly larger text */
+  border-radius: 5px; /* Rounded corners */
+  border: 1px solid #ced4da; /* Light gray border */
+}
+
+/* Focus style for input fields */
+.custom-form .form-control:focus {
+  border-color: #80bdff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+/* Style labels for clarity */
+.custom-form .form-label {
+  font-weight: 500; /* Slightly bold */
+  color: #495057; /* Dark gray for contrast */
+  margin-bottom: 8px; /* Space below labels */
+}
+
+/* Align and style the title prominently at the top */
+h2 {
+  font-size: 2.5rem; /* Larger title */
+  color: #007bff; /* Banking app blue */
+  margin-bottom: 30px; /* Space below title */
+  text-align: center; /* Centered */
+}
+
+/* Consistent styling for paragraphs */
+p {
+  font-size: 1.1rem; /* Readable size */
+  color: #495057; /* Dark gray */
+}
+
+/* Navigation bar styling */
+nav {
+  background-color: #fff;
+  padding: 10px 0;
+  text-align: center;
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: inline-flex;
+}
+
+nav ul li {
+  margin: 0 15px;
+}
+
+nav ul li a {
+  font-size: 1.2rem;
+  color: #495057;
+  text-decoration: none;
+}
+
+nav ul li a:hover {
+  color: #007bff;
+}
+
+/* Button hover effect */
+.btn-primary:hover {
+  background-color: #0056b3;
+  border-color: #004085;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .custom-form {
+    padding: 20px;
+  }
+  .custom-form .form-control {
+    font-size: 1rem;
+    padding: 10px 12px;
+  }
+  h2 {
+    font-size: 2rem;
+  }
+  nav ul {
+    flex-direction: column;
+  }
+  nav ul li {
+    margin: 10px 0;
+  }
+}
