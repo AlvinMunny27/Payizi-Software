@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Submit via hidden form to avoid CORS
     const hiddenForm = document.createElement('form');
     hiddenForm.method = 'POST';
-    hiddenForm.action = 'https://script.google.com/macros/s/AKfycbwkAW6UeN6E_OHZv8FZ8K0QnPalbAZwpt6HHzdbDR8OptFYPDvsRDwzCd2_bn_SkgTk/exec'; // Replace with your Web App URL
+    hiddenForm.action = 'https://script.google.com/macros/s/AKfycbxpL7ue2ahd-SE-x6DwCohVCH9TfJ0-GXWZUOvT2jsdJXNjjOfOtA-sFlyNVh9CRnB6/exec'; // Replace with your Web App URL
     hiddenForm.style.display = 'none';
     const input = document.createElement('input');
     input.type = 'hidden';
