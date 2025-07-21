@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Track your Payizi money transfer order status" />
+  <meta name="author" content="Payizi Global" />
+  <title>Order Status - Payizi Global</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    /* Custom button styling */
+    .btn-custom {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.25rem; /* Uniform spacing between icon and text (4px) */
+      border-width: 1px; /* Default border thickness for all buttons */
+    }
+
+    /* Reduce border thickness on small screens (<576px) */
+    @media (max-width: 575.98px) {
+      .btn-custom {
+        border-width: 0.5px; /* Reduced border thickness on small screens */
+      }
+    }
+
+    /* Ensure consistent focus and hover states */
+    .btn-custom:focus,
+    .btn-custom:hover {
+      border-width: 1px; /* Maintain 1px border on focus/hover */
+    }
+
+    /* Specific adjustments for outline buttons */
+    .btn-outline-primary.btn-custom,
+    .btn-outline-secondary.btn-custom,
+    .btn-outline-info.btn-custom {
+      padding: 0.375rem 0.75rem; /* Consistent padding */
+    }
+  </style>
+</head>
+<body>
+      <nav class="navbar">
+        <div class="container">
+          <div class="navbar-brand">
+            <img src="white_icon_transparent_background.png" alt="Payizi Global Logo" class="navbar-logo">
+            <span class="brand-text">Payizi Global</span>
+          </div>
+          <button class="navbar-toggler-alt collapsed d-md-none" type="button" aria-label="Toggle navigation">
+            <div class="hamburger">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          </button>
+          <ul class="navbar-nav">
+            <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+            <li class="nav-item"><a href="status.html" class="nav-link active">Track Order</a></li>
+            <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+          </ul>
+        </div>
+      </nav>
+
+      <main class="container mt-4">
+        <h2 class="text-center mb-4">Track Your Order</h2>
+        
+        <div id="lookupSection" class="custom-form">
+          <h4>Enter Order Details</h4>
+          <div class="row">
+            <div class="col-md-8">
+              <input type="text" class="form-control mb-2" id="orderRef" placeholder="Order Reference (e.g. ABC12345)" required />
+            </div>
+            <div class="col-md-4">
+              <button id="trackBtn" class="btn btn-primary w-100">Track Order</button>
+            </div>
+          </div>
+          <small class="text-muted">Enter the order reference from your confirmation email</small>
+        </div>
+
+        <div id="loadingSection" class="text-center mt-4" style="display:none">
+          <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+          <p class="mt-2">Searching for your order...</p>
+        </div>
+
+        <div id="statusSection" class="mt-4" style="display:none">
+          <div class="card">
+            <div class="card-header bg-primary text-white">
+              <h4 class="mb-0">Order Status</h4>
+            </div>
+            <div class="card-body">
+              <div id="pollingStatus" style="display: none; color: #007bff; font-style: italic; margin-bottom: 10px;">
+                Checking for updates...
+              </div>
+
+              <div class="row mb-4">
+                <div class="col-md-6">
+                  <h5>Order Information</h5>
+                  <table class="table table-borderless">
+                    <tr><td><strong>Order Reference:</strong></td><td id="statusOrderRef">-</td></tr>
+                    <tr><td><strong>Customer:</strong></td><td id="statusCustomerName">-</td></tr>
+                    <tr><td><strong>Email:</strong></td><td id="statusEmail">-</td></tr>
+                    <tr><td><strong>Status:</strong></td><td><span id="statusBadge" class="badge">-</span></td></tr>
+                    <tr><td><strong>Last Updated:</strong></td><td id="statusLastUpdated">-</td></tr>
+                  </table>
+                </div>
+                <div class="col-md-6">
+                  <h5>Transfer Details</h5>
+                  <table class="table table-borderless">
+                    <tr><td><strong>USD Amount:</strong></td><td id="statusUsdAmount">-</td></tr>
+                    <tr><td><strong>ZAR Total:</strong></td><td id="statusZarTotal">-</td></tr>
+                    <tr><td><strong>Exchange Rate:</strong></td><td id="statusRate">-</td></tr>
+                    <tr><td><strong>Beneficiary:</strong></td><td id="statusBeneficiary">-</td></tr>
+                    <tr><td><strong>Location:</strong></td><td id="statusLocation">-</td></tr>
+                  </table>
+                </div>
+              </div>
+
+              <div class="mb-4">
+                <h5>Order Progress</h5>
+                <div class="progress-container">
+                  <div class="progress mb-3" style="height: 30px;">
+                    <div id="progressBar" class="progress-bar progress-bar-striped" role="progressbar" style="width: 0%">
+                      <span id="progressText">Pending Payment</span>
+                    </div>
+                  </div>
+                  
+                  <div class="row text-center">
+                    <div class="col timeline-step" id="step1">
+                      <div class="timeline-icon">📋</div>
+                      <small>Order Created</small>
+                    </div>
+                    <div class="col timeline-step" id="step2">
+                      <div class="timeline-icon">💰</div>
+                      <small>Payment Received</small>
+                    </div>
+                    <div class="col timeline-step" id="step3">
+                      <div class="timeline-icon">⚡</div>
+                      <small>Processing</small>
+                    </div>
+                    <div class="col timeline-step" id="step4">
+                      <div class="timeline-icon">🚀</div>
+                      <small>Sent to Beneficiary</small>
+                    </div>
+                    <div class="col timeline-step" id="step5">
+                      <div class="timeline-icon">✅</div>
+                      <small>Completed</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div id="paymentInstructions" class="alert alert-warning" style="display:none">
+                <h5>⚠️ Payment Required</h5>
+                <p>Your order is waiting for payment. Please pay to:</p>
+                <div class="bg-white p-3 border rounded">
+                  <p><strong>Bank:</strong> First National Bank</p>
+                  <p><strong>Account Name:</strong> Payizi Global</p>
+                  <p><strong>Account Number:</strong> 63077437200</p>
+                  <p><strong>Branch Code:</strong> 250655</p>
+                  <p><strong>Reference:</strong> <span id="paymentRef" class="fw-bold text-primary">-</span></p>
+                </div>
+                <p class="mt-2 mb-0">
+                  <strong>Important:</strong> Use your order reference as the payment reference.
+                  Once payment is made, your order will be processed within 24-48 hours.
+                </p>
+              </div>
+
+              <div class="row justify-content-center mt-4">
+                <div class="col-12 col-md-10 col-lg-8">
+                  <div class="d-flex flex-wrap justify-content-center gap-2">
+                    <button id="refreshBtn" class="btn btn-outline-primary btn-custom">
+                      <i class="bi bi-arrow-clockwise"></i> Refresh Status
+                    </button>
+                    <button id="stopPollingBtn" class="btn btn-outline-secondary btn-custom">
+                      <i class="bi bi-pause"></i> Stop Updates
+                    </button>
+                    <button id="downloadReceiptBtn" class="btn btn-outline-secondary btn-custom">
+                      <i class="bi bi-download"></i> Download Receipt
+                    </button>
+                    <a href="mailto:info@payizi.io" class="btn btn-outline-info btn-custom">
+                      <i class="bi bi-envelope"></i> Contact Support
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="errorSection" class="alert alert-danger mt-4" style="display:none">
+          <h5>❌ Order Not Found</h5>
+          <p>We couldn't find an order with that reference. Please check:</p>
+          <ul>
+            <li>Order reference is entered correctly (case sensitive)</li>
+            <li>Order was created recently (check your email confirmation)</li>
+            <li>Contact support if you need assistance</li>
+          </ul>
+        </div>
+
+        <div class="mt-5 p-4 bg-light rounded">
+          <div class="row">
+            <div class="col-md-6">
+              <h5>Need Help?</h5>
+              <p>Our support team is here to assist you with any questions about your transfer.</p>
+            </div>
+            <div class="col-md-6">
+              <p><strong>📧 Email:</strong> <a href="mailto:info@payizi.io">info@payizi.io</a></p>
+              <p><strong>📱 WhatsApp:</strong> <a href="https://wa.me/27652114047" target="_blank">+27 65 2114 047</a></p>
+              <h6 class="mb-1">Business Hours</h6>
+              <p class="mb-1"><strong>Monday - Friday:</strong> 8:00 AM - 5:00 PM (CAT)</p>
+              <p class="mb-1"><strong>Saturday:</strong> 8:00 AM - 1:00 PM (CAT)</p>
+              <small class="text-muted">Sunday: Closed</small>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <footer class="bg-dark text-white text-center py-4 mt-5">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <img src="/white_icon_transparent_background.png" alt="Payizi Global" class="footer-logo">
+              <h5 class="mb-3">Payizi Global</h5>
+              <h4 class="text-warning mb-3">POWERING ZIMBABWE'S FINANCIAL FUTURE</h4>
+              <p class="mb-2">Payizi makes sending money, paying bills, and supporting loved ones effortless.</p>
+              <p class="mb-2">Join the fintech revolution built for Zimbabweans everywhere.</p>
+              <p class="mb-4">Your security and satisfaction are our top priorities.</p>
+              <div class="mb-3">
+                <a href="mailto:info@payizi.io" class="text-white text-decoration-none me-3">
+                  <i class="bi bi-envelope"></i> info@payizi.io
+                </a>
+                <a href="https://wa.me/27652114047" target="_blank" class="text-white text-decoration-none">
+                  <i class="bi bi-whatsapp"></i> +27 65 2114 047
+                </a>
+              </div>
+              <p class="text-muted small mb-0">
+                © 2025 Payizi Global. All rights reserved.
+              </p>
+            </div>
+          </div>
+        </div>
+      </footer>
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+      <script src="status.js"></script>
+      
+      <script>
+        document.addEventListener('DOMContentLoaded', function() {
+          const navbarToggler = document.querySelector('.navbar-toggler-alt');
+          const navbarNav = document.querySelector('.navbar-nav');
+          
+          if (navbarToggler && navbarNav) {
+            navbarNav.classList.remove('show');
+            navbarToggler.classList.add('collapsed');
+            
+            navbarToggler.addEventListener('click', function(e) {
+              e.preventDefault();
+              e.stopPropagation();
+              navbarNav.classList.toggle('show');
+              this.classList.toggle('collapsed');
+            });
+            
+            document.addEventListener('click', function(event) {
+              if (!navbarNav.contains(event.target) && !navbarToggler.contains(event.target)) {
+                navbarNav.classList.remove('show');
+                navbarToggler.classList.add('collapsed');
+              }
+            });
+            
+            document.querySelectorAll('.nav-link').forEach(link => {
+              link.addEventListener('click', function() {
+                if (window.innerWidth < 768) {
+                  navbarNav.classList.remove('show');
+                  navbarToggler.classList.add('collapsed');
+                }
+              });
+            });
+            
+            window.addEventListener('resize', function() {
+              if (window.innerWidth >= 768) {
+                navbarNav.classList.remove('show');
+                navbarToggler.classList.add('collapsed');
+              }
+            });
+          }
+        });
+      </script>
+</body>
+</html>

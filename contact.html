@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Contact Payizi Global - Get support for your international money transfer" />
+  <meta name="author" content="Payizi Global" />
+  <title>Contact Us - Payizi Global</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Roboto+Mono&display=swap" rel="stylesheet" />
+</head>
+<body>
+    <!-- Replace the navigation section with this corrected version -->
+    <nav class="navbar">
+        <div class="container">
+            <!-- Logo/Brand Section -->
+            <div class="navbar-brand">
+            <img src="white_icon_transparent_background.png" alt="Payizi Global Logo" class="navbar-logo">
+            <span class="brand-text">Payizi Global</span>
+            </div>
+            
+            <!-- Mobile Menu Toggle Button -->
+            <button class="navbar-toggler-alt collapsed d-md-none" type="button" aria-label="Toggle navigation">
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            </button>
+            
+            <!-- Navigation Links -->
+            <ul class="navbar-nav">
+            <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+            <li class="nav-item"><a href="status.html" class="nav-link">Track Order</a></li>
+            <li class="nav-item"><a href="contact.html" class="nav-link active">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+  <!-- Rest of your existing content stays the same -->
+
+  <main class="container mt-4">
+    <!-- Page Header -->
+    <div class="text-center mb-5">
+      <h1 class="display-5 fw-bold text-primary">
+        <i class="bi bi-headset"></i> Contact Us
+      </h1>
+      <p class="lead text-muted">
+        We're here to help with your international payment needs
+      </p>
+    </div>
+
+    <div class="row">
+      <!-- Contact Information -->
+      <div class="col-lg-6 mb-4">
+        <div class="card h-100 shadow-sm">
+          <div class="card-header bg-primary text-white">
+            <h4 class="mb-0">
+              <i class="bi bi-info-circle"></i> Get in Touch
+            </h4>
+          </div>
+          <div class="card-body">
+            <h5 class="text-primary mb-3">Customer Support</h5>
+            <p class="mb-4">Our dedicated support team is ready to assist you with any questions about your transfers, payments, or technical issues.</p>
+            
+            <!-- Email Contact -->
+            <div class="contact-item d-flex align-items-start mb-4">
+              <div class="contact-icon bg-primary text-white rounded-circle me-3 d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                <i class="bi bi-envelope-fill fs-5"></i>
+              </div>
+              <div>
+                <h6 class="mb-1">Email Support</h6>
+                <p class="mb-1">
+                  <a href="mailto:info@payizi.io" class="text-decoration-none fw-bold">info@payizi.io</a>
+                </p>
+                <small class="text-muted">Response time: Within 2-4 hours</small>
+              </div>
+            </div>
+            
+            <!-- WhatsApp Contact -->
+            <div class="contact-item d-flex align-items-start mb-4">
+              <div class="contact-icon bg-success text-white rounded-circle me-3 d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                <i class="bi bi-whatsapp fs-5"></i>
+              </div>
+              <div>
+                <h6 class="mb-1">WhatsApp Support</h6>
+                <p class="mb-1">
+                  <a href="https://wa.me/27652114047" target="_blank" class="text-decoration-none fw-bold">+27 65 2114 047</a>
+                </p>
+                <small class="text-muted">Quick responses during business hours</small>
+              </div>
+            </div>
+            
+            <!-- Business Hours -->
+            <div class="contact-item d-flex align-items-start mb-3">
+              <div class="contact-icon bg-warning text-white rounded-circle me-3 d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                <i class="bi bi-clock-fill fs-5"></i>
+              </div>
+              <div>
+                <h6 class="mb-1">Business Hours</h6>
+                <p class="mb-1"><strong>Monday - Friday:</strong> 8:00 AM - 5:00 PM (CAT)</p>
+                <p class="mb-1"><strong>Saturday:</strong> 8:00 AM - 1:00 PM (CAT)</p>
+                <small class="text-muted">Sunday: Closed</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Contact Form -->
+      <div class="col-lg-6 mb-4">
+        <div class="card h-100 shadow-sm">
+          <div class="card-header bg-success text-white">
+            <h4 class="mb-0">
+              <i class="bi bi-chat-dots"></i> Send Us a Message
+            </h4>
+          </div>
+          <div class="card-body">
+            <form id="contactForm">
+              <div class="mb-3">
+                <label for="contactName" class="form-label">Full Name *</label>
+                <input type="text" class="form-control" id="contactName" required>
+              </div>
+              
+              <div class="mb-3">
+                <label for="contactEmail" class="form-label">Email Address *</label>
+                <input type="email" class="form-control" id="contactEmail" required>
+              </div>
+              
+              <div class="mb-3">
+                <label for="contactPhone" class="form-label">Phone Number</label>
+                <input type="tel" class="form-control" id="contactPhone" placeholder="+27...">
+              </div>
+              
+              <div class="mb-3">
+                <label for="contactSubject" class="form-label">How can we help? *</label>
+                <select class="form-select" id="contactSubject" required>
+                  <option value="">Choose a topic...</option>
+                  <option value="order-inquiry">Order Status Inquiry</option>
+                  <option value="payment-issue">Payment Problems</option>
+                  <option value="technical-support">Technical Support</option>
+                  <option value="rate-inquiry">Exchange Rate Questions</option>
+                  <option value="account-help">Account Assistance</option>
+                  <option value="general-question">General Questions</option>
+                  <option value="complaint">Complaint or Feedback</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+              
+              <div class="mb-3">
+                <label for="orderRef" class="form-label">Order Reference (if applicable)</label>
+                <input type="text" class="form-control" id="orderRef" placeholder="e.g., ABCD1234">
+              </div>
+              
+              <div class="mb-4">
+                <label for="contactMessage" class="form-label">Message *</label>
+                <textarea class="form-control" id="contactMessage" rows="5" placeholder="Please describe your question or issue in detail..." required></textarea>
+              </div>
+              
+              <button type="submit" class="btn btn-success w-100 btn-lg">
+                <i class="bi bi-send"></i> Send Message
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- FAQ Section -->
+    <div class="row mt-5">
+      <div class="col-12">
+        <h3 class="text-center mb-4">
+          <i class="bi bi-question-circle"></i> Frequently Asked Questions
+        </h3>
+        
+        <div class="accordion" id="faqAccordion">
+          <!-- FAQ Item 1 -->
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                How long does a transfer take?
+              </button>
+            </h2>
+            <div id="faq1" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+              <div class="accordion-body">
+                Most transfers are completed within 24 hours after payment confirmation. Same-day processing is available for orders received and funded before 5:00 PM on business days.
+              </div>
+            </div>
+          </div>
+          
+          <!-- FAQ Item 2 -->
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                How do I track my order?
+              </button>
+            </h2>
+            <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+              <div class="accordion-body">
+                You can track your order using our <a href="status.html" class="text-decoration-none">Order Tracking page</a>. Simply enter your order reference number to see the current status.
+              </div>
+            </div>
+          </div>
+          
+          <!-- FAQ Item 3 -->
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                What payment methods do you accept?
+              </button>
+            </h2>
+            <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+              <div class="accordion-body">
+                We accept bank transfers to our First National Bank account. Payment details are provided with your order confirmation email.
+              </div>
+            </div>
+          </div>
+          
+          <!-- FAQ Item 4 -->
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+                Is my transfer secure?
+              </button>
+            </h2>
+            <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+              <div class="accordion-body">
+                Yes, all transfers are fully encrypted and secure. We use industry-standard security measures to protect your personal and financial information.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Service Features -->
+    <div class="row mt-5">
+      <div class="col-12">
+        <div class="alert alert-info">
+          <div class="row text-center">
+            <div class="col-md-3 mb-3">
+              <div class="feature-icon mb-2">
+                <i class="bi bi-shield-check text-primary" style="font-size: 2rem;"></i>
+              </div>
+              <h6 class="mb-1">Secure Transfers</h6>
+              <small>Bank-grade security for all transactions</small>
+            </div>
+            <div class="col-md-3 mb-3">
+              <div class="feature-icon mb-2">
+                <i class="bi bi-clock-history text-success" style="font-size: 2rem;"></i>
+              </div>
+              <h6 class="mb-1">Fast Processing</h6>
+              <small>24 hour completion time</small>
+            </div>
+            <div class="col-md-3 mb-3">
+              <div class="feature-icon mb-2">
+                <i class="bi bi-graph-up text-warning" style="font-size: 2rem;"></i>
+              </div>
+              <h6 class="mb-1">Best Rates</h6>
+              <small>Competitive exchange rates</small>
+            </div>
+            <div class="col-md-3 mb-3">
+              <div class="feature-icon mb-2">
+                <i class="bi bi-headset text-info" style="font-size: 2rem;"></i>
+              </div>
+              <h6 class="mb-1">24/7 Support</h6>
+              <small>We're here when you need us</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Enhanced Footer -->
+      <footer class="bg-dark text-white text-center py-4 mt-5">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <img src="/white_icon_transparent_background.png" alt="Payizi Global" class="footer-logo">
+              <h5 class="mb-3">Payizi Global</h5>
+              <h4 class="text-warning mb-3">POWERING ZIMBABWE'S FINANCIAL FUTURE</h4>
+              <p class="mb-2">Payizi makes sending money, paying bills, and supporting loved ones effortless.</p>
+              <p class="mb-2">Join the fintech revolution built for Zimbabweans everywhere.</p>
+              <p class="mb-4">Your security and satisfaction are our top priorities.</p>
+              <div class="mb-3">
+                <a href="mailto:info@payizi.io" class="text-white text-decoration-none me-3">
+                  <i class="bi bi-envelope"></i> info@payizi.io
+                </a>
+                <a href="https://wa.me/27652114047" target="_blank" class="text-white text-decoration-none">
+                  <i class="bi bi-whatsapp"></i> +27 65 2114 047
+                </a>
+              </div>
+              <p class="text-muted small mb-0">
+                © 2025 Payizi Global. All rights reserved.
+              </p>
+            </div>
+          </div>
+        </div>
+      </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <!-- Contact Form Handler -->
+  <script>
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const name = document.getElementById('contactName').value;
+      const email = document.getElementById('contactEmail').value;
+      const phone = document.getElementById('contactPhone').value;
+      const subject = document.getElementById('contactSubject').value;
+      const orderRef = document.getElementById('orderRef').value;
+      const message = document.getElementById('contactMessage').value;
+      
+      // Build detailed email content
+      let emailBody = `Name: ${name}\nEmail: ${email}`;
+      if (phone) emailBody += `\nPhone: ${phone}`;
+      if (orderRef) emailBody += `\nOrder Reference: ${orderRef}`;
+      emailBody += `\n\nSubject: ${subject}\n\nMessage:\n${message}`;
+      
+      // Create mailto link
+      const mailtoLink = `mailto:info@payizi.io?subject=[Contact Form] ${subject}&body=${encodeURIComponent(emailBody)}`;
+      
+      // Open email client
+      window.location.href = mailtoLink;
+      
+      // Show success feedback
+      const submitBtn = e.target.querySelector('button[type="submit"]');
+      const originalText = submitBtn.innerHTML;
+      submitBtn.innerHTML = '<i class="bi bi-check-circle"></i> Email Opened Successfully!';
+      submitBtn.disabled = true;
+      submitBtn.className = 'btn btn-outline-success w-100 btn-lg';
+      
+      // Reset after 3 seconds
+      setTimeout(() => {
+        submitBtn.innerHTML = originalText;
+        submitBtn.disabled = false;
+        submitBtn.className = 'btn btn-success w-100 btn-lg';
+        e.target.reset();
+      }, 3000);
+    });
+  </script>
+  <!-- Mobile Menu Toggle Script -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const navbarToggler = document.querySelector('.navbar-toggler-alt');
+  const navbarNav = document.querySelector('.navbar-nav');
+  
+  if (navbarToggler && navbarNav) {
+    navbarNav.classList.remove('show');
+    navbarToggler.classList.add('collapsed');
+    
+    navbarToggler.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      navbarNav.classList.toggle('show');
+      this.classList.toggle('collapsed');
+    });
+    
+    document.addEventListener('click', function(event) {
+      if (!navbarNav.contains(event.target) && !navbarToggler.contains(event.target)) {
+        navbarNav.classList.remove('show');
+        navbarToggler.classList.add('collapsed');
+      }
+    });
+    
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', function() {
+        if (window.innerWidth < 768) {
+          navbarNav.classList.remove('show');
+          navbarToggler.classList.add('collapsed');
+        }
+      });
+    });
+    
+    window.addEventListener('resize', function() {
+      if (window.innerWidth >= 768) {
+        navbarNav.classList.remove('show');
+        navbarToggler.classList.add('collapsed');
+      }
+    });
+  }
+});
+</script>
+</body>
+</html>

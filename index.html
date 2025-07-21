@@ -1,82 +1,473 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Roboto+Mono&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Payizi Global - Secure international money transfer service" />
+  <meta name="author" content="Payizi Global" />
   <title>Payizi Order Form</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Roboto+Mono&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <nav>
-    <ul>
-      <li><a href="#">Home</a></li>
-      <li><a href="#">Order</a></li>
-      <li><a href="#">Contact</a></li>
-    </ul>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="container">
+      <!-- Logo/Brand Section -->
+      <div class="navbar-brand">
+        <img src="white_icon_transparent_background.png" alt="Payizi Global Logo" class="navbar-logo">
+        <span class="brand-text">Payizi Global</span>
+      </div>
+      
+      <!-- Mobile Menu Toggle Button -->
+      <button class="navbar-toggler-alt collapsed d-md-none" type="button" aria-label="Toggle navigation">
+        <div class="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </button>
+      
+      <!-- Navigation Links -->
+      <ul class="navbar-nav">
+        <li class="nav-item"><a href="index.html" class="nav-link active">Home</a></li>
+        <li class="nav-item"><a href="status.html" class="nav-link">Track Order</a></li>
+        <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+      </ul>
+    </div>
   </nav>
-  <div class="container mt-5">
-    <h2 class="text-center">My Payment Detail</h2>
-    <form id="orderForm" class="custom-form mt-4">
-      <!-- Cost Information Section -->
-      <div class="mb-4">
-        <h4>Calculate Your Cost</h4>
-        <div class="mb-3">
-          <label for="usdAmount" class="form-label">USD Required (multiples of 10)</label>
-          <input type="number" class="form-control" id="usdAmount" step="10" min="10" required>
-        </div>
-        <p>Exchange Rate Per USD: <span id="rate">Loading...</span></p>
-        <p>Effective Exchange Rate: <span id="effectiveRate">Loading...</span></p>
-        <p>ZAR Total: <span id="zarTotal">0.00</span></p>
-      </div>
 
-      <!-- Customer Details -->
-      <div class="mb-4">
-        <h4>Customer Details</h4>
-        <div class="mb-3">
-          <label for="name" class="form-label">Full Name</label>
-          <input type="text" class="form-control" id="name" required>
+  <!-- Main Content -->
+  <main class="container mt-4">
+    <h2 class="text-center mb-4">
+    
+      My Payment Detail
+    </h2>
+    
+    <!-- Enhanced Order Form with Validation -->
+    <form id="orderForm" class="custom-form">
+      
+      <!-- Amount Details Section -->
+      <section>
+        <h4><i class="fas fa-dollar-sign me-2"></i>Amount Details</h4>
+        
+        <div class="form-group">
+          <label for="usdAmount" class="form-label">USD Amount Required *</label>
+          <div class="form-control-icon">
+            <input type="number" class="form-control" id="usdAmount" name="usdAmount" step="5" min="5" max="10000" placeholder="100" required />
+            <i class="form-icon fas fa-dollar-sign"></i>
+            <i class="validation-icon valid fas fa-check-circle"></i>
+            <i class="validation-icon invalid fas fa-exclamation-circle"></i>
+          </div>
+          <div class="form-text">Amount between $5 and $5,000</div>
         </div>
-        <div class="mb-3">
-          <label for="email" class="form-label">Email</label>
-          <input type="email" class="form-control" id="email" required>
+        
+        <!-- Exchange Rate Display -->
+        <div class="row mt-3">
+          <div class="col-md-4">
+            <div class="card h-100">
+              <div class="card-body text-center">
+                <h6 class="card-title text-muted">Exchange Rate</h6>
+                <p class="h5 text-primary mb-0">
+                  <i class="fas fa-exchange-alt me-1"></i>
+                  <span id="rate">Loading...</span>
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card h-100">
+              <div class="card-body text-center">
+                <h6 class="card-title text-muted">Effective Rate</h6>
+                <p class="h5 text-info mb-0">
+                  <i class="fas fa-calculator me-1"></i>
+                  <span id="effectiveRate">Loading...</span>
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card h-100">
+              <div class="card-body text-center">
+                <h6 class="card-title text-muted">ZAR Total</h6>
+                <p class="h5 text-success mb-0">
+                  <i class="fas fa-coins me-1"></i>
+                  R<span id="zarTotal">0.00</span>
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="mb-3">
-          <label for="mobile" class="form-label">Mobile (with country code)</label>
-          <input type="tel" class="form-control" id="mobile" required>
-        </div>
-      </div>
+      </section>
 
-      <!-- Beneficiary Details -->
-      <div class="mb-4">
-        <h4>Beneficiary Details</h4>
-        <div class="mb-3">
-          <label for="beneficiaryName" class="form-label">Beneficiary Name</label>
-          <input type="text" class="form-control" id="beneficiaryName" required>
+      <!-- Customer Information Section -->
+      <section>
+        <h4><i class="fas fa-user me-2"></i>Customer Information</h4>
+        
+        <div class="form-group">
+          <label for="name" class="form-label">Full Name *</label>
+          <div class="form-control-icon">
+            <input type="text" class="form-control" id="name" name="name" placeholder="Enter your full name" required />
+            <i class="form-icon fas fa-user"></i>
+            <i class="validation-icon valid fas fa-check-circle"></i>
+            <i class="validation-icon invalid fas fa-exclamation-circle"></i>
+          </div>
+          
         </div>
-        <div class="mb-3">
-          <label for="beneficiaryMobile" class="form-label">Beneficiary Mobile</label>
-          <input type="tel" class="form-control" id="beneficiaryMobile" required>
+        
+        <div class="form-group">
+          <label for="email" class="form-label">Email Address *</label>
+          <div class="form-control-icon">
+            <input type="email" class="form-control" id="email" name="email" placeholder="your.email@example.com" required />
+            <i class="form-icon fas fa-envelope"></i>
+            <i class="validation-icon valid fas fa-check-circle"></i>
+            <i class="validation-icon invalid fas fa-exclamation-circle"></i>
+          </div>
+          <div class="form-text">We'll send order confirmations to this email address</div>
         </div>
-        <div class="mb-3">
-          <label for="beneficiaryId" class="form-label">Beneficiary Government ID</label>
-          <input type="text" class="form-control" id="beneficiaryId" required>
+        
+        <div class="form-group">
+          <label for="mobile" class="form-label">Mobile Number *</label>
+          <div class="form-control-icon">
+            <input type="tel" class="form-control" id="mobile" name="mobile" placeholder="+27 82 123 4567" required />
+            <i class="form-icon fas fa-mobile-alt"></i>
+            <i class="validation-icon valid fas fa-check-circle"></i>
+            <i class="validation-icon invalid fas fa-exclamation-circle"></i>
+          </div>
+          
         </div>
-        <div class="mb-3">
-          <label for="country" class="form-label">Receiving Country</label>
-          <input type="text" class="form-control" id="country" required>
-        </div>
-        <div class="mb-3">
-          <label for="location" class="form-label">Collection Point</label>
-          <input type="text" class="form-control" id="location" required>
-        </div>
-      </div>
+      </section>
 
-      <button type="submit" class="btn btn-primary">Submit Order</button>
+      <!-- Beneficiary Information Section -->
+      <section>
+        <h4><i class="fas fa-user-friends me-2"></i>Beneficiary Information</h4>
+        
+        <div class="form-group">
+          <label for="beneficiaryName" class="form-label">Beneficiary Name *</label>
+          <div class="form-control-icon">
+            <input type="text" class="form-control" id="beneficiaryName" name="beneficiaryName" placeholder="Full name of recipient" required />
+            <i class="form-icon fas fa-user-friends"></i>
+            <i class="validation-icon valid fas fa-check-circle"></i>
+            <i class="validation-icon invalid fas fa-exclamation-circle"></i>
+          </div>
+         
+        </div>
+        
+        <div class="form-group">
+          <label for="beneficiaryMobile" class="form-label">Beneficiary Mobile *</label>
+          <div class="form-control-icon">
+            <input type="tel" class="form-control" id="beneficiaryMobile" name="beneficiaryMobile" placeholder="+263 77 123 4567" required />
+            <i class="form-icon fas fa-phone"></i>
+            <i class="validation-icon valid fas fa-check-circle"></i>
+            <i class="validation-icon invalid fas fa-exclamation-circle"></i>
+          </div>
+         
+        </div>
+        
+        <div class="form-group">
+          <label for="beneficiaryId" class="form-label">Government ID / Passport *</label>
+          <div class="form-control-icon">
+            <input type="text" class="form-control" id="beneficiaryId" name="beneficiaryId" placeholder="12-345678A90 or AB123456" required />
+            <i class="form-icon fas fa-id-card"></i>
+            <i class="validation-icon valid fas fa-check-circle"></i>
+            <i class="validation-icon invalid fas fa-exclamation-circle"></i>
+          </div>
+         
+        </div>
+        
+        <div class="form-group">
+          <label for="country" class="form-label">Receiving Country *</label>
+          <div class="form-select-icon">
+            <select class="form-select" id="country" name="country" required>
+              <option value="">Select country...</option>
+              <option value="Zimbabwe">Zimbabwe</option>
+            </select>
+            <i class="form-icon fas fa-globe-africa"></i>
+          </div>
+          
+        </div>
+        
+        <div class="form-group">
+          <label for="location" class="form-label">Pickup Location *</label>
+          <div class="form-select-icon">
+            <select class="form-select" id="location" name="location" required>
+              <option value="">Select pickup location...</option>
+              <option value="harare-livingstone">Harare - Livingstone Avenue</option>
+              <option value="zhombe-joel">Zhombe - Joel</option>
+              <option value="bulawayo-9th">Bulawayo - 9th Avenue</option>
+            </select>
+            <i class="form-icon fas fa-map-marker-alt"></i>
+          </div>
+          
+        </div>
+      </section>
+
+      <!-- Form Buttons -->
+      <div class="d-grid gap-2">
+        <button type="submit" class="btn btn-primary btn-lg">
+          <i class="fas fa-arrow-right me-2"></i>
+          Proceed to Review
+        </button>
+        <button id="savePdfBtn" class="btn btn-outline-primary" type="button">
+          <i class="fas fa-file-pdf me-2"></i>
+          Save As PDF
+        </button>
+      </div>
     </form>
-    <div id="confirmation" class="mt-3 alert alert-success" style="display:none;">Order submitted successfully!</div>
-  </div>
-  <script src="script.js"></script>
+
+    <!-- Order Review Section -->
+    <section id="reviewSection" class="mt-4" style="display:none">
+      <div class="custom-form">
+        <h4><i class="fas fa-clipboard-check me-2"></i>Order Review</h4>
+        <div class="alert alert-info">
+          <i class="fas fa-info-circle me-2"></i>
+          Please review your order details carefully before confirming.
+        </div>
+        
+        <pre id="reviewOutput" class="bg-light p-3 border rounded"></pre>
+
+        <h5 class="mt-4">
+          <i class="fas fa-university me-2"></i>
+          Payment Instructions
+        </h5>
+        <div class="card">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-6">
+                <p><strong><i class="fas fa-building me-2"></i>Bank:</strong> First National Bank</p>
+                <p><strong><i class="fas fa-user-tie me-2"></i>Account Name:</strong> Payizi Global</p>
+                <p><strong><i class="fas fa-hashtag me-2"></i>Account Number:</strong> 63077437200</p>
+              </div>
+              <div class="col-md-6">
+                <p><strong><i class="fas fa-code-branch me-2"></i>Branch Code:</strong> 250655</p>
+                <p><strong><i class="fas fa-receipt me-2"></i>Reference:</strong> <span id="orderRef" class="text-primary fw-bold"></span></p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-between flex-wrap gap-2 mt-4">
+          <button id="backBtn" class="btn btn-secondary">
+            <i class="fas fa-arrow-left me-2"></i>
+            Back to Edit
+          </button>
+          <button id="confirmBtn" class="btn btn-success">
+            <i class="fas fa-check me-2"></i>
+            Confirm & Submit
+          </button>
+          <button id="pdfBtn" class="btn btn-outline-primary">
+            <i class="fas fa-download me-2"></i>
+            Download PDF
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Confirmation Message -->
+    <div id="confirmation" class="alert alert-success mt-3" style="display:none">
+      <i class="fas fa-check-circle me-2"></i>
+      Order submitted and email sent successfully!
+    </div>
+  </main>
+
+  <!-- Enhanced Footer -->
+  <footer class="bg-dark text-white text-center py-4 mt-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <img src="white_icon_transparent_background.png" alt="Payizi Global" class="footer-logo">
+          <h5 class="mb-3">Payizi Global</h5>
+          <h4 class="text-warning mb-3">POWERING ZIMBABWE'S FINANCIAL FUTURE</h4>
+          <p class="mb-2">Payizi makes sending money, paying bills, and supporting loved ones effortless.</p>
+          <p class="mb-2">Join the fintech revolution built for Zimbabweans everywhere.</p>
+          <p class="mb-4">Your security and satisfaction are our top priorities.</p>
+          <div class="mb-3">
+            <a href="mailto:info@payizi.io" class="text-white text-decoration-none me-3">
+              <i class="bi bi-envelope"></i> info@payizi.io
+            </a>
+            <a href="https://wa.me/27652114047" target="_blank" class="text-white text-decoration-none">
+              <i class="bi bi-whatsapp"></i> +27 65 2114 047
+            </a>
+          </div>
+          <p class="text-muted small mb-0">
+            © 2025 Payizi Global. All rights reserved.
+          </p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  
+  <!-- Form Validation Enhancement Script (Non-interfering) -->
+  <script>
+    console.log('🔧 Form validation enhancement loaded');
+
+    // Country-specific validation patterns
+    const VALIDATION_PATTERNS = {
+      southAfrica: {
+        mobile: /^(\+27|0)[6-8][0-9]{8}$/,
+        formats: { mobile: '+27 XX XXX XXXX or 0XX XXX XXXX' }
+      },
+      zimbabwe: {
+        mobile: /^(\+263|0)[7][0-9]{8}$/,
+        id: /^[0-9]{2}-[0-9]{6,7}[A-Z][0-9]{2}$/,
+        passport: /^[A-Z]{2}[0-9]{6}$/,
+        formats: {
+          mobile: '+263 7X XXX XXXX or 07X XXX XXXX',
+          id: 'XX-XXXXXXX[A-Z]XX format',
+          passport: 'XX000000 format (2 letters + 6 numbers)'
+        }
+      }
+    };
+
+    // Enhanced validation functions (non-interfering)
+    function enhanceFieldValidation() {
+      // Add visual feedback to existing validation
+      const fields = ['name', 'email', 'mobile', 'beneficiaryName', 'beneficiaryMobile', 'beneficiaryId', 'country', 'location', 'usdAmount'];
+      
+      fields.forEach(fieldId => {
+        const field = document.getElementById(fieldId);
+        if (!field) return;
+        
+        field.addEventListener('input', () => addVisualFeedback(fieldId));
+        field.addEventListener('blur', () => addVisualFeedback(fieldId));
+      });
+    }
+
+    function addVisualFeedback(fieldId) {
+      const field = document.getElementById(fieldId);
+      if (!field) return;
+      
+      const value = field.value.trim();
+      let isValid = false;
+      
+      // Basic validation
+      switch(fieldId) {
+        case 'name':
+        case 'beneficiaryName':
+          isValid = value.length >= 2 && /^[a-zA-Z\s]+$/.test(value);
+          break;
+        case 'email':
+          isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+          break;
+        case 'mobile':
+          const cleanedSA = value.replace(/[\s\-\(\)]/g, '');
+          isValid = VALIDATION_PATTERNS.southAfrica.mobile.test(cleanedSA);
+          break;
+        case 'beneficiaryMobile':
+          const cleanedZW = value.replace(/[\s\-\(\)]/g, '');
+          isValid = VALIDATION_PATTERNS.zimbabwe.mobile.test(cleanedZW);
+          break;
+        case 'beneficiaryId':
+          isValid = VALIDATION_PATTERNS.zimbabwe.id.test(value) || 
+                   VALIDATION_PATTERNS.zimbabwe.passport.test(value.toUpperCase());
+          break;
+        case 'country':
+        case 'location':
+          isValid = value !== '';
+          break;
+        case 'usdAmount':
+          const amount = parseFloat(value);
+          isValid = !isNaN(amount) && amount >= 5 && amount <= 10000;
+          break;
+        default:
+          isValid = value.length > 0;
+      }
+      
+      // Update visual feedback
+      field.classList.remove('is-valid', 'is-invalid');
+      if (value && field.type !== 'submit') {
+        field.classList.add(isValid ? 'is-valid' : 'is-invalid');
+      }
+    }
+
+    // Format mobile numbers as user types
+    function addMobileFormatting() {
+      const mobileField = document.getElementById('mobile');
+      const beneficiaryMobileField = document.getElementById('beneficiaryMobile');
+      
+      if (mobileField) {
+        mobileField.addEventListener('input', function() {
+          const value = this.value.replace(/\D/g, '');
+          if (value.startsWith('27')) {
+            this.value = '+27 ' + value.slice(2, 4) + ' ' + value.slice(4, 7) + ' ' + value.slice(7, 11);
+          } else if (value.startsWith('0')) {
+            this.value = value.slice(0, 3) + ' ' + value.slice(3, 6) + ' ' + value.slice(6, 10);
+          }
+        });
+      }
+      
+      if (beneficiaryMobileField) {
+        beneficiaryMobileField.addEventListener('input', function() {
+          const value = this.value.replace(/\D/g, '');
+          if (value.startsWith('263')) {
+            this.value = '+263 ' + value.slice(3, 5) + ' ' + value.slice(5, 8) + ' ' + value.slice(8, 12);
+          } else if (value.startsWith('07')) {
+            this.value = value.slice(0, 3) + ' ' + value.slice(3, 6) + ' ' + value.slice(6, 10);
+          }
+        });
+      }
+    }
+
+    // Initialize enhancements after DOM is ready but don't interfere with existing functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      setTimeout(() => {
+        enhanceFieldValidation();
+        addMobileFormatting();
+        console.log('✅ Form validation enhancements initialized');
+      }, 200); // Delay to ensure order.js loads first
+    });
+  </script>
+  
+  <!-- Load order.js BEFORE other scripts to avoid conflicts -->
+  <script type="module" src="order.js"></script>
+  
+  <!-- Mobile Menu Toggle Script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const navbarToggler = document.querySelector('.navbar-toggler-alt');
+      const navbarNav = document.querySelector('.navbar-nav');
+      
+      if (navbarToggler && navbarNav) {
+        navbarNav.classList.remove('show');
+        navbarToggler.classList.add('collapsed');
+        
+        navbarToggler.addEventListener('click', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          navbarNav.classList.toggle('show');
+          this.classList.toggle('collapsed');
+        });
+        
+        document.addEventListener('click', function(event) {
+          if (!navbarNav.contains(event.target) && !navbarToggler.contains(event.target)) {
+            navbarNav.classList.remove('show');
+            navbarToggler.classList.add('collapsed');
+          }
+        });
+        
+        document.querySelectorAll('.nav-link').forEach(link => {
+          link.addEventListener('click', function() {
+            if (window.innerWidth < 768) {
+              navbarNav.classList.remove('show');
+              navbarToggler.classList.add('collapsed');
+            }
+          }); 
+        });
+        
+        window.addEventListener('resize', function() {
+          if (window.innerWidth >= 768) {
+            navbarNav.classList.remove('show');
+            navbarToggler.classList.add('collapsed');
+          }
+        });
+      }
+    });
+  </script>
 </body>
 </html>
