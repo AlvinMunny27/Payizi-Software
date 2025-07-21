@@ -63,10 +63,12 @@
         </div>
       </nav>
 
-      <main class="container mt-4">
+      <!-- Add status-page class to main container -->
+      <main class="container status-page mt-4">
         <h2 class="text-center mb-4">Track Your Order</h2>
         
-        <div id="lookupSection" class="custom-form">
+        <!-- Add status-tracking-form class -->
+        <div id="lookupSection" class="custom-form status-tracking-form">
           <h4>Enter Order Details</h4>
           <div class="row">
             <div class="col-md-8">
@@ -79,15 +81,18 @@
           <small class="text-muted">Enter the order reference from your confirmation email</small>
         </div>
 
-        <div id="loadingSection" class="text-center mt-4" style="display:none">
-          <div class="spinner-border text-primary" role="status">
+        <!-- Add status-loading-container class -->
+        <div id="loadingSection" class="status-loading-container text-center mt-4" style="display:none">
+          <div class="spinner-border text-primary status-loading-spinner" role="status">
             <span class="visually-hidden">Loading...</span>
           </div>
           <p class="mt-2">Searching for your order...</p>
         </div>
 
-        <div id="statusSection" class="mt-4" style="display:none">
-          <div class="card">
+        <!-- Add status-result-container class -->
+        <div id="statusSection" class="status-result-container mt-4" style="display:none">
+          <!-- Add order-details-card class -->
+          <div class="card order-details-card">
             <div class="card-header bg-primary text-white">
               <h4 class="mb-0">Order Status</h4>
             </div>
@@ -121,32 +126,34 @@
 
               <div class="mb-4">
                 <h5>Order Progress</h5>
-                <div class="progress-container">
+                <!-- Add status-progress-container class -->
+                <div class="progress-container status-progress-container">
                   <div class="progress mb-3" style="height: 30px;">
                     <div id="progressBar" class="progress-bar progress-bar-striped" role="progressbar" style="width: 0%">
                       <span id="progressText">Pending Payment</span>
                     </div>
                   </div>
                   
-                  <div class="row text-center">
-                    <div class="col timeline-step" id="step1">
-                      <div class="timeline-icon">📋</div>
+                  <!-- Add status-timeline class -->
+                  <div class="row text-center status-timeline">
+                    <div class="col timeline-step status-progress-step pending" id="step1">
+                      <div class="timeline-icon status-timeline-marker">📋</div>
                       <small>Order Created</small>
                     </div>
-                    <div class="col timeline-step" id="step2">
-                      <div class="timeline-icon">💰</div>
+                    <div class="col timeline-step status-progress-step pending" id="step2">
+                      <div class="timeline-icon status-timeline-marker">💰</div>
                       <small>Payment Received</small>
                     </div>
-                    <div class="col timeline-step" id="step3">
-                      <div class="timeline-icon">⚡</div>
+                    <div class="col timeline-step status-progress-step pending" id="step3">
+                      <div class="timeline-icon status-timeline-marker">⚡</div>
                       <small>Processing</small>
                     </div>
-                    <div class="col timeline-step" id="step4">
-                      <div class="timeline-icon">🚀</div>
+                    <div class="col timeline-step status-progress-step pending" id="step4">
+                      <div class="timeline-icon status-timeline-marker">🚀</div>
                       <small>Sent to Beneficiary</small>
                     </div>
-                    <div class="col timeline-step" id="step5">
-                      <div class="timeline-icon">✅</div>
+                    <div class="col timeline-step status-progress-step pending" id="step5">
+                      <div class="timeline-icon status-timeline-marker">✅</div>
                       <small>Completed</small>
                     </div>
                   </div>
@@ -191,9 +198,10 @@
           </div>
         </div>
 
-        <div id="errorSection" class="alert alert-danger mt-4" style="display:none">
+        <!-- Add status-error-container class -->
+        <div id="errorSection" class="alert alert-danger status-error-container mt-4" style="display:none">
           <h5>❌ Order Not Found</h5>
-          <p>We couldn't find an order with that reference. Please check:</p>
+          <p class="status-error-message">We couldn't find an order with that reference. Please check:</p>
           <ul>
             <li>Order reference is entered correctly (case sensitive)</li>
             <li>Order was created recently (check your email confirmation)</li>
