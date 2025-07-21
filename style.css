@@ -1546,635 +1546,355 @@ footer a:hover {
 
 /* ...existing code... */
 
-/* Enhanced Dark Mode for ALL Pages - Status Page Included */
+/* TARGETED STATUS PAGE DARK MODE FIX - ADD TO END OF FILE */
 @media (prefers-color-scheme: dark) {
-  body {
-    color: #f8f9fa !important;
-    background-color: #121212 !important;
-  }
-
-  /* Headings */
-  h1, h2, h3, h4, h5, h6 {
-    color: #ffffff !important;
-  }
-
-  /* Paragraphs and text */
-  p, .text-muted, span, div, label, small {
-    color: #e0e0e0 !important;
-  }
-
-  /* Links */
-  a {
-    color: #4ade80 !important;
-  }
-
-  a:hover {
-    color: #22d3ee !important;
-  }
-
-  /* Navbar */
-  .navbar {
-    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%) !important;
-  }
-
-  .navbar-nav {
-    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%) !important;
-  }
-
-  .nav-link {
-    color: #f8f9fa !important;
-  }
-
-  .nav-link:hover,
-  .nav-link.active {
-    color: #000000 !important;
-    background-color: var(--primary-green) !important;
-  }
-
-  .brand-text {
-    color: #ffffff !important;
-  }
-
-  /* Forms */
-  .custom-form {
+  /* Status page specific dark mode additions */
+  
+  /* Status tracking form containers */
+  .status-tracking-form,
+  .tracking-form-container {
     background: #1e1e1e !important;
     border-color: #404040 !important;
     color: #f8f9fa !important;
   }
-
-  .custom-form h4 {
-    color: #ffffff !important;
-    border-bottom-color: #4ade80 !important;
-  }
-
-  .form-label {
-    color: #f8f9fa !important;
-    font-weight: 500 !important;
-  }
-
-  .form-control {
-    color: #f8f9fa !important;
+  
+  /* Status tracking input fields */
+  .status-tracking-form .form-control,
+  .tracking-form-container .form-control {
     background-color: #2d2d2d !important;
+    color: #f8f9fa !important;
     border-color: #404040 !important;
   }
-
-  .form-control:focus {
-    background-color: #363636 !important;
-    border-color: #4ade80 !important;
-    box-shadow: 0 0 0 0.2rem rgba(74, 222, 128, 0.25) !important;
-    color: #ffffff !important;
-  }
-
-  .form-control::placeholder {
-    color: #9ca3af !important;
-  }
-
-  .form-select {
-    color: #f8f9fa !important;
-    background-color: #2d2d2d !important;
-    border-color: #404040 !important;
-  }
-
-  .form-select:focus {
+  
+  .status-tracking-form .form-control:focus,
+  .tracking-form-container .form-control:focus {
     background-color: #363636 !important;
     border-color: #4ade80 !important;
     color: #ffffff !important;
   }
-
-  /* Cards */
-  .card {
+  
+  /* Status tracking labels */
+  .status-tracking-form .form-label,
+  .tracking-form-container .form-label {
+    color: #f8f9fa !important;
+  }
+  
+  /* Status result containers */
+  .status-result-container,
+  .order-status-display,
+  .tracking-result {
     background: #1e1e1e !important;
     border-color: #404040 !important;
     color: #f8f9fa !important;
   }
-
-  .card-header {
-    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%) !important;
-    border-bottom-color: #404040 !important;
+  
+  /* Status result text elements */
+  .status-result-container h1,
+  .status-result-container h2,
+  .status-result-container h3,
+  .status-result-container h4,
+  .status-result-container h5,
+  .order-status-display h1,
+  .order-status-display h2,
+  .order-status-display h3,
+  .order-status-display h4,
+  .order-status-display h5,
+  .tracking-result h1,
+  .tracking-result h2,
+  .tracking-result h3,
+  .tracking-result h4,
+  .tracking-result h5 {
     color: #ffffff !important;
   }
-
-  .card-body {
+  
+  .status-result-container p,
+  .status-result-container span,
+  .status-result-container div,
+  .order-status-display p,
+  .order-status-display span,
+  .order-status-display div,
+  .tracking-result p,
+  .tracking-result span,
+  .tracking-result div {
+    color: #e0e0e0 !important;
+  }
+  
+  /* Status page specific sections */
+  .status-page-container {
+    background: #121212 !important;
     color: #f8f9fa !important;
   }
-
-  .card-title {
-    color: #ffffff !important;
+  
+  .status-page-header {
+    background: linear-gradient(135deg, #4ade80 0%, #22d3ee 100%) !important;
+    color: #000000 !important;
   }
-
-  /* STATUS PAGE SPECIFIC DARK MODE */
-  .status-container {
+  
+  .status-page-content {
     background: #1e1e1e !important;
     color: #f8f9fa !important;
+  }
+  
+  /* Status tracking sections by ID */
+  #orderStatusSection,
+  #trackingSection,
+  #statusDisplaySection {
+    background: #1e1e1e !important;
+    color: #f8f9fa !important;
+  }
+  
+  #orderStatusSection h1,
+  #orderStatusSection h2,
+  #orderStatusSection h3,
+  #trackingSection h1,
+  #trackingSection h2,
+  #trackingSection h3,
+  #statusDisplaySection h1,
+  #statusDisplaySection h2,
+  #statusDisplaySection h3 {
+    color: #ffffff !important;
+  }
+  
+  #orderStatusSection p,
+  #orderStatusSection span,
+  #trackingSection p,
+  #trackingSection span,
+  #statusDisplaySection p,
+  #statusDisplaySection span {
+    color: #e0e0e0 !important;
+  }
+  
+  /* Status tracking progress elements */
+  .status-progress-container {
+    background: #2d2d2d !important;
     border-color: #404040 !important;
   }
-
-  .status-header {
+  
+  .status-progress-step {
+    color: #f8f9fa !important;
+  }
+  
+  .status-progress-step.completed {
     background: linear-gradient(135deg, #4ade80 0%, #22d3ee 100%) !important;
     color: #000000 !important;
   }
-
-  .status-content {
-    background: #1e1e1e !important;
-    color: #f8f9fa !important;
-  }
-
-  /* Status tracking sections */
-  #loadingSection,
-  #statusSection,
-  #errorSection {
-    background: #1e1e1e !important;
-    color: #f8f9fa !important;
-  }
-
-  #loadingSection h3,
-  #statusSection h3,
-  #errorSection h3 {
-    color: #ffffff !important;
-  }
-
-  #loadingSection p,
-  #statusSection p,
-  #errorSection p {
-    color: #e0e0e0 !important;
-  }
-
-  /* Progress timeline for status page */
-  .progress-timeline {
-    background: #1e1e1e !important;
-  }
-
-  .progress-step {
-    color: #f8f9fa !important;
-  }
-
-  .step-content h5 {
-    color: #ffffff !important;
-  }
-
-  .step-content p {
-    color: #e0e0e0 !important;
-  }
-
-  .step-icon.completed {
-    background: linear-gradient(135deg, #4ade80 0%, #22d3ee 100%) !important;
-    color: #000000 !important;
-  }
-
-  .step-icon.active {
+  
+  .status-progress-step.active {
     background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%) !important;
     color: #000000 !important;
   }
-
-  .step-icon.pending {
+  
+  .status-progress-step.pending {
     background-color: #404040 !important;
     color: #9ca3af !important;
   }
-
-  /* Progress bar */
-  .progress {
-    background-color: #404040 !important;
+  
+  /* Status badges and indicators */
+  .status-badge-success {
+    background-color: #4ade80 !important;
+    color: #000000 !important;
   }
-
-  .progress-bar {
-    background: linear-gradient(90deg, #4ade80 0%, #22d3ee 100%) !important;
+  
+  .status-badge-warning {
+    background-color: #fbbf24 !important;
+    color: #000000 !important;
   }
-
-  /* Status tracking input section */
-  .status-container .custom-form {
-    background: #2d2d2d !important;
-    border-color: #404040 !important;
+  
+  .status-badge-danger {
+    background-color: #f87171 !important;
+    color: #000000 !important;
   }
-
-  .status-container .form-control {
-    background-color: #363636 !important;
-    color: #ffffff !important;
-    border-color: #404040 !important;
+  
+  .status-badge-info {
+    background-color: #22d3ee !important;
+    color: #000000 !important;
   }
-
-  .status-container .form-control:focus {
-    background-color: #404040 !important;
-    border-color: #4ade80 !important;
-    color: #ffffff !important;
+  
+  /* Status page loading states */
+  .status-loading-container {
+    background: #1e1e1e !important;
+    color: #f8f9fa !important;
   }
-
-  .status-container .btn-primary {
+  
+  .status-loading-spinner {
+    color: #4ade80 !important;
+  }
+  
+  /* Status page error states */
+  .status-error-container {
+    background: #1e1e1e !important;
+    color: #f8f9fa !important;
+  }
+  
+  .status-error-message {
+    color: #f87171 !important;
+  }
+  
+  /* Status page buttons */
+  .status-page .btn-primary {
     background: linear-gradient(135deg, #4ade80 0%, #22d3ee 100%) !important;
     border-color: #4ade80 !important;
     color: #000000 !important;
   }
-
-  .status-container .btn-primary:hover {
+  
+  .status-page .btn-primary:hover {
     background: linear-gradient(135deg, #22d3ee 0%, #4ade80 100%) !important;
     color: #000000 !important;
   }
-
-  /* Status result display */
-  .status-result {
-    background: #2d2d2d !important;
-    color: #f8f9fa !important;
-    border-color: #404040 !important;
+  
+  .status-page .btn-outline-primary {
+    color: #4ade80 !important;
+    border-color: #4ade80 !important;
   }
-
-  .status-result h4,
-  .status-result h5 {
-    color: #ffffff !important;
-  }
-
-  .status-result .badge {
+  
+  .status-page .btn-outline-primary:hover {
     background-color: #4ade80 !important;
     color: #000000 !important;
   }
-
-  .status-info {
-    background: #363636 !important;
+  
+  /* Order details display */
+  .order-details-card {
+    background: #2d2d2d !important;
     border-color: #404040 !important;
     color: #f8f9fa !important;
   }
-
-  /* Alerts for status page */
-  .alert-success {
-    color: #d1fae5 !important;
-    background-color: #064e3b !important;
-    border-color: #065f46 !important;
-  }
-
-  .alert-danger {
-    color: #fecaca !important;
-    background-color: #7f1d1d !important;
-    border-color: #991b1b !important;
-  }
-
-  .alert-warning {
-    color: #fef3c7 !important;
-    background-color: #78350f !important;
-    border-color: #92400e !important;
-  }
-
-  .alert-info {
-    color: #dbeafe !important;
-    background-color: #1e3a8a !important;
-    border-color: #1d4ed8 !important;
-  }
-
-  /* Footer */
-  footer {
+  
+  .order-details-card .card-header {
     background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%) !important;
-    color: #f8f9fa !important;
-  }
-
-  footer h4 {
-    color: #fbbf24 !important;
-  }
-
-  footer h5 {
     color: #ffffff !important;
   }
-
-  footer p {
-    color: #e0e0e0 !important;
-  }
-
-  footer a {
-    color: #4ade80 !important;
-  }
-
-  footer a:hover {
-    background-color: rgba(74, 222, 128, 0.1) !important;
-    color: #ffffff !important;
-  }
-
-  /* Contact page specific */
-  .contact-item {
-    border-bottom-color: #404040 !important;
-    color: #f8f9fa !important;
-  }
-
-  .contact-item h5 {
-    color: #ffffff !important;
-  }
-
-  .contact-item p {
-    color: #e0e0e0 !important;
-  }
-
-  .contact-icon {
-    color: #4ade80 !important;
-  }
-
-  /* Accordion */
-  .accordion-button:not(.collapsed) {
-    background-color: #404040 !important;
-    border-color: #4ade80 !important;
-    color: #ffffff !important;
-  }
-
-  .accordion-button {
-    background-color: #2d2d2d !important;
-    color: #f8f9fa !important;
-    border-color: #404040 !important;
-  }
-
-  .accordion-button:focus {
-    box-shadow: 0 0 0 0.25rem rgba(74, 222, 128, 0.25) !important;
-    border-color: #4ade80 !important;
-  }
-
-  .accordion-body {
-    background-color: #2d2d2d !important;
-    color: #f8f9fa !important;
-  }
-
-  /* Buttons in dark mode */
-  .btn-outline-secondary {
-    color: #f8f9fa !important;
-    border-color: #6b7280 !important;
-  }
-
-  .btn-outline-secondary:hover {
-    background-color: #6b7280 !important;
-    color: #ffffff !important;
-  }
-
-  .btn-outline-info {
-    color: #22d3ee !important;
-    border-color: #22d3ee !important;
-  }
-
-  .btn-outline-info:hover {
-    background-color: #22d3ee !important;
-    color: #000000 !important;
-  }
-
-  .btn-outline-primary {
-    color: #4ade80 !important;
-    border-color: #4ade80 !important;
-  }
-
-  .btn-outline-primary:hover {
-    background-color: #4ade80 !important;
-    color: #000000 !important;
-  }
-
-  /* Text utilities for dark mode */
-  .text-muted {
-    color: #9ca3af !important;
-  }
-
-  .text-primary {
-    color: #4ade80 !important;
-  }
-
-  .text-success {
-    color: #4ade80 !important;
-  }
-
-  .text-warning {
-    color: #fbbf24 !important;
-  }
-
-  .text-danger {
-    color: #f87171 !important;
-  }
-
-  .text-info {
-    color: #22d3ee !important;
-  }
-
-  .text-dark {
-    color: #f8f9fa !important;
-  }
-
-  /* Specific elements that might be missed */
-  .navbar-toggler-alt .hamburger span {
-    background: #ffffff !important;
-  }
-
-  /* Input focus states */
-  input:focus,
-  textarea:focus,
-  select:focus {
-    color: #ffffff !important;
-  }
-
-  /* Option elements */
-  option {
-    background-color: #2d2d2d !important;
-    color: #f8f9fa !important;
-  }
-
-  /* Any remaining text elements */
-  .container,
-  .container-fluid,
-  main,
-  section,
-  article {
-    color: inherit !important;
-  }
-
-  /* Status tracking specific elements */
-  .order-details {
+  
+  .order-details-card .card-body {
     background: #2d2d2d !important;
-    border-color: #404040 !important;
     color: #f8f9fa !important;
   }
-
-  .order-details dt {
-    color: #ffffff !important;
-  }
-
-  .order-details dd {
-    color: #e0e0e0 !important;
-  }
-
-  /* Loading spinner */
-  .spinner-border {
-    color: #4ade80 !important;
-  }
-
-  /* Badge elements */
-  .badge {
-    background-color: #4ade80 !important;
-    color: #000000 !important;
-  }
-
-  .badge.bg-success {
-    background-color: #4ade80 !important;
-    color: #000000 !important;
-  }
-
-  .badge.bg-warning {
-    background-color: #fbbf24 !important;
-    color: #000000 !important;
-  }
-
-  .badge.bg-danger {
-    background-color: #f87171 !important;
-    color: #000000 !important;
-  }
-
-  .badge.bg-info {
-    background-color: #22d3ee !important;
-    color: #000000 !important;
-  }
-
-  /* Tables if present */
-  .table {
-    color: #f8f9fa !important;
-    background-color: #2d2d2d !important;
-  }
-
-  .table th {
-    color: #ffffff !important;
-    border-color: #404040 !important;
-  }
-
-  .table td {
-    color: #e0e0e0 !important;
-    border-color: #404040 !important;
-  }
-
-  /* List group items */
-  .list-group-item {
-    background-color: #2d2d2d !important;
-    color: #f8f9fa !important;
-    border-color: #404040 !important;
-  }
-
-  /* Timeline specific for status tracking */
-  .timeline {
+  
+  /* Timeline elements for status tracking */
+  .status-timeline {
     background: #2d2d2d !important;
   }
-
-  .timeline-item {
+  
+  .status-timeline-item {
     color: #f8f9fa !important;
   }
-
-  .timeline-item .timeline-marker {
+  
+  .status-timeline-marker {
     background: #4ade80 !important;
     color: #000000 !important;
   }
-
-  .timeline-item .timeline-content h6 {
+  
+  .status-timeline-content h6 {
     color: #ffffff !important;
   }
-
-  .timeline-item .timeline-content p {
+  
+  .status-timeline-content p {
     color: #e0e0e0 !important;
   }
-
-  /* Status specific classes */
-  .status-pending {
-    color: #fbbf24 !important;
+  
+  /* Status page tables */
+  .status-page .table {
+    color: #f8f9fa !important;
+    background-color: #2d2d2d !important;
   }
-
-  .status-processing {
-    color: #22d3ee !important;
+  
+  .status-page .table th {
+    color: #ffffff !important;
+    border-color: #404040 !important;
+    background-color: #1a1a1a !important;
   }
-
-  .status-completed {
-    color: #4ade80 !important;
+  
+  .status-page .table td {
+    color: #e0e0e0 !important;
+    border-color: #404040 !important;
   }
-
-  .status-failed {
-    color: #f87171 !important;
-  }
-
-  /* Pre and code elements */
-  pre {
+  
+  /* Status page pre/code elements */
+  .status-page pre {
     background-color: #2d2d2d !important;
     color: #f8f9fa !important;
     border-color: #404040 !important;
   }
-
-  code {
+  
+  .status-page code {
     background-color: #363636 !important;
     color: #f8f9fa !important;
   }
-
-  /* Modal if present */
-  .modal-content {
+  
+  /* Status page modals */
+  .status-page .modal-content {
     background-color: #2d2d2d !important;
     color: #f8f9fa !important;
   }
-
-  .modal-header {
+  
+  .status-page .modal-header {
     border-bottom-color: #404040 !important;
+    background-color: #1a1a1a !important;
+    color: #ffffff !important;
   }
-
-  .modal-footer {
-    border-top-color: #404040 !important;
-  }
-
-  /* Dropdown menus */
-  .dropdown-menu {
+  
+  .status-page .modal-body {
     background-color: #2d2d2d !important;
-    border-color: #404040 !important;
-  }
-
-  .dropdown-item {
     color: #f8f9fa !important;
   }
-
-  .dropdown-item:hover {
-    background-color: #4ade80 !important;
-    color: #000000 !important;
+  
+  .status-page .modal-footer {
+    border-top-color: #404040 !important;
+    background-color: #1a1a1a !important;
+  }
+  
+  /* Generic status page text fixes */
+  .status-page h1,
+  .status-page h2,
+  .status-page h3,
+  .status-page h4,
+  .status-page h5,
+  .status-page h6 {
+    color: #ffffff !important;
+  }
+  
+  .status-page p,
+  .status-page span,
+  .status-page div,
+  .status-page label {
+    color: #e0e0e0 !important;
+  }
+  
+  .status-page .text-muted {
+    color: #9ca3af !important;
+  }
+  
+  /* Status page specific container classes */
+  .container.status-page,
+  .container-fluid.status-page {
+    background: #121212 !important;
+    color: #f8f9fa !important;
   }
 }
 
-/* Force dark mode styles for specific data attributes */
-[data-bs-theme="dark"],
-.dark-mode {
-  color: #f8f9fa !important;
-  background-color: #121212 !important;
-}
-
-[data-bs-theme="dark"] .custom-form,
-.dark-mode .custom-form {
-  background: #1e1e1e !important;
-  color: #f8f9fa !important;
-}
-
-[data-bs-theme="dark"] .form-control,
-.dark-mode .form-control {
-  background-color: #2d2d2d !important;
-  color: #f8f9fa !important;
-  border-color: #404040 !important;
-}
-
-[data-bs-theme="dark"] .form-label,
-.dark-mode .form-label {
-  color: #f8f9fa !important;
-}
-
+/* Force dark mode for status page with data attributes */
 [data-bs-theme="dark"] .status-container,
 .dark-mode .status-container {
   background: #1e1e1e !important;
   color: #f8f9fa !important;
 }
 
-/* Additional status page specific elements */
-.tracking-form {
-  background: #2d2d2d !important;
-  border-color: #404040 !important;
-}
-
-.order-status {
-  background: #363636 !important;
-  border-color: #404040 !important;
+[data-bs-theme="dark"] .status-page,
+.dark-mode .status-page {
+  background: #121212 !important;
   color: #f8f9fa !important;
 }
 
-.status-badge {
-  background-color: #4ade80 !important;
-  color: #000000 !important;
+[data-bs-theme="dark"] .status-page .form-control,
+.dark-mode .status-page .form-control {
+  background-color: #2d2d2d !important;
+  color: #f8f9fa !important;
+  border-color: #404040 !important;
 }
 
-/* Ensure all text is visible in dark mode */
-* {
-  color: inherit !important;
+[data-bs-theme="dark"] .status-page .card,
+.dark-mode .status-page .card {
+  background: #1e1e1e !important;
+  color: #f8f9fa !important;
+  border-color: #404040 !important;
 }
 
-body * {
-  color: inherit !important;
-}
