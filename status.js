@@ -24,13 +24,17 @@ function checkElements() {
   const loadingSection = document.getElementById('loadingSection');
   const statusSection = document.getElementById('statusSection');
   const errorSection = document.getElementById('errorSection');
+  const customerMobileDisplay = document.getElementById('customerMobile'); // Optional new element
+  const recipientMobileDisplay = document.getElementById('recipientMobile'); // Optional new element
   
   console.log('📋 Element check:', {
     trackButton: !!trackButton,
     orderIdInput: !!orderIdInput,
     loadingSection: !!loadingSection,
     statusSection: !!statusSection,
-    errorSection: !!errorSection
+    errorSection: !!errorSection,
+    customerMobileDisplay: !!customerMobileDisplay,
+    recipientMobileDisplay: !!recipientMobileDisplay
   });
   
   if (!trackButton) console.error('❌ trackBtn not found');
@@ -39,7 +43,7 @@ function checkElements() {
   if (!statusSection) console.error('❌ statusSection not found');
   if (!errorSection) console.error('❌ errorSection not found');
   
-  return { trackButton, orderIdInput, loadingSection, statusSection, errorSection };
+  return { trackButton, orderIdInput, loadingSection, statusSection, errorSection, customerMobileDisplay, recipientMobileDisplay };
 }
 
 // Fetch order data
@@ -90,7 +94,7 @@ async function fetchOrder(orderId) {
 async function trackOrder() {
   console.log('🔍 trackOrder function called');
   
-  const { trackButton, orderIdInput, loadingSection, statusSection, errorSection } = checkElements();
+  const { trackButton, orderIdInput, loadingSection, statusSection, errorSection, customerMobileDisplay, recipientMobileDisplay } = checkElements();
   
   if (!trackButton || !orderIdInput) {
     console.error('❌ Missing required elements');
@@ -213,7 +217,7 @@ function hideLoading() {
 function displayOrderStatus(orderData) {
   console.log('🎨 Displaying order:', orderData);
   
-  const { statusSection, errorSection } = checkElements();
+  const { statusSection, errorSection, customerMobileDisplay, recipientMobileDisplay } = checkElements();
   
   if (errorSection) errorSection.style.display = 'none';
   if (statusSection) statusSection.style.display = 'block';
@@ -228,6 +232,13 @@ function displayOrderStatus(orderData) {
   updateElement('statusBeneficiary', orderData.recipient);
   updateElement('statusLocation', `${orderData.location}, ${orderData.destination}`);
   updateElement('paymentRef', orderData.orderId);
+  
+  if (customerMobileDisplay) {
+    updateElement('customerMobile', orderData.customerMobile || '-');
+  }
+  if (recipientMobileDisplay) {
+    updateElement('recipientMobile', orderData.recipientMobile || '-');
+  }
   
   const statusBadge = document.getElementById('statusBadge');
   if (statusBadge) {
@@ -433,7 +444,7 @@ function testConnection() {
 
 // Download receipt as PDF
 function downloadReceipt() {
-  const orderData = {}; // Populate this from displayOrderStatus state or current data
+  const orderData = {};
   const { statusSection } = checkElements();
   
   if (!statusSection || statusSection.style.display === 'none') {
@@ -441,7 +452,6 @@ function downloadReceipt() {
     return;
   }
   
-  // Extract data from current UI elements or maintain state
   orderData.orderId = document.getElementById('statusOrderRef').textContent;
   orderData.customerName = document.getElementById('statusCustomerName').textContent;
   orderData.email = document.getElementById('statusEmail').textContent;

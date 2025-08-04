@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Payizi Global - Payments service" />
+  <meta name="description" content="Payizi Global - Secure international money transfer service" />
   <meta name="author" content="Payizi Global" />
-  <title>Payizi</title>
+  <title>Payizi Order Form</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -130,14 +130,14 @@
         </div>
         
         <div class="form-group">
-          <label for="mobile" class="form-label">Mobile Number *</label>
+          <label for="mobile" class="form-label">Mobile Number (South Africa) *</label>
           <div class="form-control-icon">
-            <input type="tel" class="form-control" id="mobile" name="mobile" placeholder="+27 82 123 4567" required />
+            <input type="tel" class="form-control" id="mobile" name="mobile" placeholder="+27 82 1234 567" required />
             <i class="form-icon fas fa-mobile-alt"></i>
             <i class="validation-icon valid fas fa-check-circle"></i>
             <i class="validation-icon invalid fas fa-exclamation-circle"></i>
           </div>
-          
+          <div class="form-text">South African mobile number only (+27 XX XXX XXXX or 0XX XXX XXXX)</div>
         </div>
       </section>
 
@@ -157,14 +157,14 @@
         </div>
         
         <div class="form-group">
-          <label for="beneficiaryMobile" class="form-label">Beneficiary Mobile *</label>
+          <label for="beneficiaryMobile" class="form-label">Beneficiary Mobile (Zimbabwe) *</label>
           <div class="form-control-icon">
             <input type="tel" class="form-control" id="beneficiaryMobile" name="beneficiaryMobile" placeholder="+263 77 123 4567" required />
             <i class="form-icon fas fa-phone"></i>
             <i class="validation-icon valid fas fa-check-circle"></i>
             <i class="validation-icon invalid fas fa-exclamation-circle"></i>
           </div>
-         
+          <div class="form-text">Zimbabwean mobile number only (+263 7X XXX XXXX or 07X XXX XXXX)</div>
         </div>
         
         <div class="form-group">
@@ -325,7 +325,7 @@
       }
     };
 
-    // Enhanced validation functions (non-interfering)
+    // Enhanced validation functions with country-specific enforcement
     function enhanceFieldValidation() {
       // Add visual feedback to existing validation
       const fields = ['name', 'email', 'mobile', 'beneficiaryName', 'beneficiaryMobile', 'beneficiaryId', 'country', 'location', 'usdAmount'];
@@ -345,35 +345,59 @@
       
       const value = field.value.trim();
       let isValid = false;
+      let errorMessage = '';
       
-      // Basic validation
+      // Basic validation with country-specific rules
       switch(fieldId) {
         case 'name':
         case 'beneficiaryName':
           isValid = value.length >= 2 && /^[a-zA-Z\s]+$/.test(value);
+          if (!isValid && value.length > 0) {
+            errorMessage = 'Name must contain only letters and spaces';
+          }
           break;
         case 'email':
           isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+          if (!isValid && value.length > 0) {
+            errorMessage = 'Please enter a valid email address';
+          }
           break;
         case 'mobile':
+          // ENFORCE: Customer mobile must be South African
           const cleanedSA = value.replace(/[\s\-\(\)]/g, '');
           isValid = VALIDATION_PATTERNS.southAfrica.mobile.test(cleanedSA);
+          if (!isValid && value.length > 0) {
+            errorMessage = 'Customer mobile must be a South African number (+27 XX XXX XXXX or 0XX XXX XXXX)';
+          }
           break;
         case 'beneficiaryMobile':
+          // ENFORCE: Beneficiary mobile must be Zimbabwean
           const cleanedZW = value.replace(/[\s\-\(\)]/g, '');
           isValid = VALIDATION_PATTERNS.zimbabwe.mobile.test(cleanedZW);
+          if (!isValid && value.length > 0) {
+            errorMessage = 'Beneficiary mobile must be a Zimbabwean number (+263 7X XXX XXXX or 07X XXX XXXX)';
+          }
           break;
         case 'beneficiaryId':
           isValid = VALIDATION_PATTERNS.zimbabwe.id.test(value) || 
                    VALIDATION_PATTERNS.zimbabwe.passport.test(value.toUpperCase());
+          if (!isValid && value.length > 0) {
+            errorMessage = 'Please enter a valid Zimbabwean ID (XX-XXXXXXX[A-Z]XX) or Passport (XX000000)';
+          }
           break;
         case 'country':
         case 'location':
           isValid = value !== '';
+          if (!isValid) {
+            errorMessage = 'Please select an option';
+          }
           break;
         case 'usdAmount':
           const amount = parseFloat(value);
           isValid = !isNaN(amount) && amount >= 5 && amount <= 10000;
+          if (!isValid && value.length > 0) {
+            errorMessage = 'Amount must be between $5 and $10,000';
+          }
           break;
         default:
           isValid = value.length > 0;
@@ -381,34 +405,114 @@
       
       // Update visual feedback
       field.classList.remove('is-valid', 'is-invalid');
+      
+      // Remove existing error message
+      const existingError = field.parentNode.parentNode.querySelector('.error-message');
+      if (existingError) {
+        existingError.remove();
+      }
+      
       if (value && field.type !== 'submit') {
         field.classList.add(isValid ? 'is-valid' : 'is-invalid');
+        
+        // Add error message for invalid fields
+        if (!isValid && errorMessage) {
+          const errorDiv = document.createElement('div');
+          errorDiv.className = 'error-message text-danger small mt-1';
+          errorDiv.textContent = errorMessage;
+          field.parentNode.parentNode.appendChild(errorDiv);
+        }
       }
     }
 
-    // Format mobile numbers as user types
+    // Format mobile numbers as user types with country-specific validation
     function addMobileFormatting() {
       const mobileField = document.getElementById('mobile');
       const beneficiaryMobileField = document.getElementById('beneficiaryMobile');
       
       if (mobileField) {
         mobileField.addEventListener('input', function() {
-          const value = this.value.replace(/\D/g, '');
+          let value = this.value.replace(/\D/g, '');
+          
+          // Force South African format only
           if (value.startsWith('27')) {
-            this.value = '+27 ' + value.slice(2, 4) + ' ' + value.slice(4, 7) + ' ' + value.slice(7, 11);
-          } else if (value.startsWith('0')) {
-            this.value = value.slice(0, 3) + ' ' + value.slice(3, 6) + ' ' + value.slice(6, 10);
+            // +27 format
+            if (value.length >= 11) {
+              this.value = '+27 ' + value.slice(2, 4) + ' ' + value.slice(4, 7) + ' ' + value.slice(7, 11);
+            } else if (value.length >= 4) {
+              this.value = '+27 ' + value.slice(2, 4) + (value.length > 4 ? ' ' + value.slice(4, 7) : '') + (value.length > 7 ? ' ' + value.slice(7) : '');
+            } else {
+              this.value = '+27 ' + value.slice(2);
+            }
+          } else if (value.startsWith('0') && value.length >= 2) {
+            // Local 0XX format
+            if (value.length >= 10) {
+              this.value = value.slice(0, 3) + ' ' + value.slice(3, 6) + ' ' + value.slice(6, 10);
+            } else if (value.length >= 6) {
+              this.value = value.slice(0, 3) + ' ' + value.slice(3, 6) + (value.length > 6 ? ' ' + value.slice(6) : '');
+            } else if (value.length >= 3) {
+              this.value = value.slice(0, 3) + (value.length > 3 ? ' ' + value.slice(3) : '');
+            }
+          } else if (!value.startsWith('27') && !value.startsWith('0') && value.length > 0) {
+            // Auto-add +27 for other numbers
+            this.value = '+27 ' + value;
+          }
+        });
+        
+        // Prevent non-South African numbers
+        mobileField.addEventListener('blur', function() {
+          const cleaned = this.value.replace(/[\s\-\(\)]/g, '');
+          if (cleaned && !VALIDATION_PATTERNS.southAfrica.mobile.test(cleaned)) {
+            // Show specific error for non-SA numbers
+            this.setCustomValidity('Customer mobile number must be a South African number');
+          } else {
+            this.setCustomValidity('');
           }
         });
       }
       
       if (beneficiaryMobileField) {
         beneficiaryMobileField.addEventListener('input', function() {
-          const value = this.value.replace(/\D/g, '');
+          let value = this.value.replace(/\D/g, '');
+          
+          // Force Zimbabwean format only
           if (value.startsWith('263')) {
-            this.value = '+263 ' + value.slice(3, 5) + ' ' + value.slice(5, 8) + ' ' + value.slice(8, 12);
-          } else if (value.startsWith('07')) {
-            this.value = value.slice(0, 3) + ' ' + value.slice(3, 6) + ' ' + value.slice(6, 10);
+            // +263 format
+            if (value.length >= 12) {
+              this.value = '+263 ' + value.slice(3, 5) + ' ' + value.slice(5, 8) + ' ' + value.slice(8, 12);
+            } else if (value.length >= 5) {
+              this.value = '+263 ' + value.slice(3, 5) + (value.length > 5 ? ' ' + value.slice(5, 8) : '') + (value.length > 8 ? ' ' + value.slice(8) : '');
+            } else {
+              this.value = '+263 ' + value.slice(3);
+            }
+          } else if (value.startsWith('07') && value.length >= 3) {
+            // Local 07X format
+            if (value.length >= 10) {
+              this.value = value.slice(0, 3) + ' ' + value.slice(3, 6) + ' ' + value.slice(6, 10);
+            } else if (value.length >= 6) {
+              this.value = value.slice(0, 3) + ' ' + value.slice(3, 6) + (value.length > 6 ? ' ' + value.slice(6) : '');
+            } else if (value.length >= 3) {
+              this.value = value.slice(0, 3) + (value.length > 3 ? ' ' + value.slice(3) : '');
+            }
+          } else if (value.startsWith('7') && value.length >= 2) {
+            // Auto-add +263 for 7X numbers
+            this.value = '+263 ' + value;
+          } else if (!value.startsWith('263') && !value.startsWith('07') && !value.startsWith('7') && value.length > 0) {
+            // Auto-add +263 for other numbers starting with valid Zim prefixes
+            if (value.startsWith('77') || value.startsWith('78') || value.startsWith('71') || value.startsWith('73')) {
+              this.value = '+263 ' + value;
+            }
+          }
+        });
+        
+        // Prevent non-Zimbabwean numbers
+        beneficiaryMobileField.addEventListener('blur', function() {
+          const cleaned = this.value.replace(/[\s\-\(\)]/g, '');
+          if (cleaned && !VALIDATION_PATTERNS.zimbabwe.mobile.test(cleaned)) {
+            // Show specific error for non-ZW numbers
+            this.setCustomValidity('Beneficiary mobile number must be a Zimbabwean number');
+          } else {
+            this.setCustomValidity('');
           }
         });
       }
@@ -419,9 +523,61 @@
       setTimeout(() => {
         enhanceFieldValidation();
         addMobileFormatting();
-        console.log('✅ Form validation enhancements initialized');
+        addFormSubmissionValidation();
+        console.log('✅ Form validation enhancements with country validation initialized');
       }, 200); // Delay to ensure order.js loads first
     });
+
+    // Add form submission validation to enforce country-specific mobile numbers
+    function addFormSubmissionValidation() {
+      const form = document.getElementById('orderForm');
+      if (form) {
+        form.addEventListener('submit', function(e) {
+          const mobileField = document.getElementById('mobile');
+          const beneficiaryMobileField = document.getElementById('beneficiaryMobile');
+          
+          let hasErrors = false;
+          let errorMessages = [];
+          
+          // Validate customer mobile (must be South African)
+          if (mobileField && mobileField.value) {
+            const cleanedSA = mobileField.value.replace(/[\s\-\(\)]/g, '');
+            if (!VALIDATION_PATTERNS.southAfrica.mobile.test(cleanedSA)) {
+              hasErrors = true;
+              errorMessages.push('Customer mobile number must be a valid South African number (+27 XX XXX XXXX or 0XX XXX XXXX)');
+              mobileField.classList.add('is-invalid');
+            }
+          }
+          
+          // Validate beneficiary mobile (must be Zimbabwean)
+          if (beneficiaryMobileField && beneficiaryMobileField.value) {
+            const cleanedZW = beneficiaryMobileField.value.replace(/[\s\-\(\)]/g, '');
+            if (!VALIDATION_PATTERNS.zimbabwe.mobile.test(cleanedZW)) {
+              hasErrors = true;
+              errorMessages.push('Beneficiary mobile number must be a valid Zimbabwean number (+263 7X XXX XXXX or 07X XXX XXXX)');
+              beneficiaryMobileField.classList.add('is-invalid');
+            }
+          }
+          
+          // Prevent form submission if there are validation errors
+          if (hasErrors) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            // Show error alert
+            alert('Please fix the following errors:\n\n' + errorMessages.join('\n'));
+            
+            // Focus on first invalid field
+            const firstInvalid = form.querySelector('.is-invalid');
+            if (firstInvalid) {
+              firstInvalid.focus();
+            }
+            
+            return false;
+          }
+        });
+      }
+    }
   </script>
   
   <!-- Load order.js BEFORE other scripts to avoid conflicts -->

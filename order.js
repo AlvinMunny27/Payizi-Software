@@ -250,15 +250,42 @@ function generateReference() {
 }
 
 // FIXED: Ensure all data fields are strings or proper types
+// Helper function to clean mobile numbers for database storage with country validation
+function cleanMobileNumber(mobile, expectedCountry = null) {
+  if (!mobile) return '';
+  
+  // Remove all non-numeric characters except +
+  let cleaned = mobile.replace(/[^\d+]/g, '');
+  
+  // Country-specific validation patterns
+  const patterns = {
+    southAfrica: /^(\+27|0)[6-8][0-9]{8}$/,
+    zimbabwe: /^(\+263|0)[7][0-9]{8}$/
+  };
+  
+  // If expected country is specified, validate against it
+  if (expectedCountry && patterns[expectedCountry]) {
+    if (!patterns[expectedCountry].test(cleaned)) {
+      console.warn(`Mobile number ${mobile} does not match expected ${expectedCountry} format`);
+    }
+  }
+  
+  // If it starts with +, keep it, otherwise ensure it's just numbers
+  if (cleaned.startsWith('+')) {
+    return cleaned;
+  }
+  return cleaned.replace(/\D/g, ''); // Remove any remaining non-digits
+}
+
 function getFormData(reference) {
   return {
     reference: reference,
     timestamp: new Date().toISOString(),
     name: document.getElementById("name").value || '',
     email: document.getElementById("email").value || '',
-    mobile: document.getElementById("mobile").value || '',
+    mobile: cleanMobileNumber(document.getElementById("mobile").value || '', 'southAfrica'),
     beneficiaryName: document.getElementById("beneficiaryName").value || '',
-    beneficiaryMobile: document.getElementById("beneficiaryMobile").value || '',
+    beneficiaryMobile: cleanMobileNumber(document.getElementById("beneficiaryMobile").value || '', 'zimbabwe'),
     beneficiaryId: document.getElementById("beneficiaryId").value || '',
     country: document.getElementById("country").value || '',
     location: document.getElementById("location").value || '',
