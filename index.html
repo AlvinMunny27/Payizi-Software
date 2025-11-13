@@ -575,41 +575,49 @@
       
       // Add ID number formatting
       if (beneficiaryIdField) {
-        beneficiaryIdField.addEventListener('input', function() {
-          let value = this.value.toUpperCase().replace(/[^A-Z0-9-]/g, '');
-          
-          // Auto-format National ID: XX-XXXXXXX[A-Z]XX
-          if (/^[0-9]/.test(value)) {
-            // Looks like a National ID
-            let numbers = value.replace(/[^0-9]/g, '');
-            let letters = value.replace(/[^A-Z]/g, '');
-            
-            if (numbers.length >= 2) {
-              let formatted = numbers.slice(0, 2);
-              if (numbers.length > 2) {
-                formatted += '-' + numbers.slice(2, 9);
-                if (letters.length > 0 && numbers.length >= 8) {
-                  formatted += letters.charAt(0);
-                  if (numbers.length > 9) {
-                    formatted += numbers.slice(9, 11);
-                  }
-                }
-              }
-              this.value = formatted;
-            }
-          } else if (/^[A-Z]/.test(value)) {
-            // Looks like a Passport: XX000000
-            let letters = value.replace(/[^A-Z]/g, '');
-            let numbers = value.replace(/[^0-9]/g, '');
-            
-            if (letters.length <= 2) {
-              this.value = letters + numbers.slice(0, 6);
-            } else {
-              this.value = letters.slice(0, 2) + numbers.slice(0, 6);
-            }
+  beneficiaryIdField.addEventListener('input', function () {
+    const raw = this.value.toUpperCase().replace(/[^A-Z0-9]/g, '');
+
+    // National ID if it starts with a digit
+    if (/^\d/.test(raw)) {
+      const district = raw.slice(0, 2).replace(/\D/g, '');
+      const rest = raw.slice(2);
+
+      let serial = '';
+      let letter = '';
+      let suffix = '';
+
+      for (const ch of rest) {
+        if (!letter) {
+          if (/[0-9]/.test(ch)) {
+            if (serial.length < 7) serial += ch; // grow serial up to 7
+          } else if (/[A-Z]/.test(ch)) {
+            // only allow letter once we have at least 6 serial digits
+            if (serial.length >= 6) letter = ch;
           }
-        });
-        
+        } else {
+          if (/[0-9]/.test(ch) && suffix.length < 2) suffix += ch;
+        }
+      }
+
+      let out = district;
+      if (serial.length) out += '-' + serial;
+      if (letter) out += letter;
+      if (suffix) out += suffix;
+
+      this.value = out;
+      return;
+    }
+
+    // Passport if it starts with a letter
+    if (/^[A-Z]/.test(raw)) {
+      const letters = raw.replace(/[^A-Z]/g, '').slice(0, 2);
+      const nums = raw.replace(/[^0-9]/g, '').slice(0, 6);
+      this.value = letters + nums;
+      return;
+    }
+  });
+
         // Validate on blur
         beneficiaryIdField.addEventListener('blur', function() {
           const validation = validateZimbabweanId(this.value);
@@ -747,4 +755,5 @@
 </body>
 
 </html>
+
 
