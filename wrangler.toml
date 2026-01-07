@@ -1,15 +1,8 @@
 name = "payizi-software"
 compatibility_date = "2024-01-01"
 
-# Pages configuration
+# Pages configuration - deploy from root directory
 pages_build_output_dir = "."
 
-[build]
-command = ""
-cwd = ""
-watch_dirs = []
-
-# Environment variables (if needed)
-[vars]
-
-# Routes configuration (handled by Cloudflare Pages automatically)
+# No build process needed for static site
+# Routes configuration handled by Cloudflare Pages automatically

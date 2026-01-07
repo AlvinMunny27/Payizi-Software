@@ -8,7 +8,7 @@ Automation Project
 This project is deployed on multiple platforms for redundancy and accessibility:
 
 - **Primary (Cloudflare Pages)**: [https://payizi-software.pages.dev](https://payizi-software.pages.dev)
-- **Backup (Netlify)**: Your Netlify URL
+- **Backup (Netlify)**: Available as fallback option
 
 ### Migration Notice
 
