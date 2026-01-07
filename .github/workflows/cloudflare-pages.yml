@@ -23,5 +23,3 @@ jobs:
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           projectName: payizi-software
           directory: .
-          # Optional: Use wrangler-version to specify a specific version
-          # wranglerVersion: '3'
